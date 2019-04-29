@@ -1,0 +1,18 @@
+h1, h4 {
+    margin-top:35px;
+}
+.list-group-flush .list-group-item {
+    border-bottom:0;
+}
+.material-icons {
+    font-size:16px;
+}
+.navbar {
+    margin-bottom:15px;
+}
+.modal .modal-body .input-group {
+    margin-bottom:10px;
+}
+.modal .modal-body .input-group .input-group-text {
+    width:150px;
+}
