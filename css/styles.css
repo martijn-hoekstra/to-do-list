@@ -3,7 +3,12 @@ h1, h4 {
 }
 .list-group-flush .list-group-item {
     border-bottom:0;
+    padding-left:3rem;
 }
+.list-group-flush .list-group-item .description {
+    font-weight:bold;
+}
+#listName { margin:0;}
 .material-icons {
     font-size:16px;
 }
@@ -15,4 +20,32 @@ h1, h4 {
 }
 .modal .modal-body .input-group .input-group-text {
     width:150px;
+}
+#removeTask { margin-left:5px; }
+
+.list-group-flush .list-group-item[data-status]::after {
+    content: '';
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    position:absolute;
+    left:1.25rem;
+    top:21px;
+}
+.list-group-flush .list-group-item[data-status="1"] {
+    color:#155724;
+    background-color:#eaf7ed;
+}
+.list-group-flush .list-group-item[data-status="1"] .description {
+    /* font-weight:normal; */
+    text-decoration: line-through;
+}
+.list-group-flush .list-group-item[data-status="1"]::after {
+    background-color:green;
+}
+.list-group-flush .list-group-item[data-status="2"]::after {
+    background-color:yellow;
+}
+[data-status="3"]::after {
+    background-color:red;
 }

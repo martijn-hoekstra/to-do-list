@@ -21,10 +21,30 @@ class Page {
             }
         } else if(e.type === 'click'){
             if(e.target.id === 'removeTask'){
-                const parent = e.target.parentNode.parentNode;
-                const taskId = e.target.parentNode.id;
+                const parent = e.target.closest('ul');
+                const taskId = e.target.closest('li').id;
                 page.lists[page.activeList].removeTask(taskId);
+            } else if(e.target.className === 'dropdown-item') {
+                const parent = e.target.closest('ul');
+                const taskId = e.target.closest('li').id;
+
+                for(let i = 0; i < page.lists[page.activeList].tasks.length; i++) {
+                    if(page.lists[page.activeList].tasks[i].id === taskId) {
+                        page.lists[page.activeList].tasks[i].status = e.target.textContent;
+                        page.lists[page.activeList].displayList();
+                        break;
+                    }
+                }
             }
         }
+    }
+
+    createElement(element, classList = '', textContent = '', id = '', href = ''){
+        const el = document.createElement(element);
+        if(classList !== '') el.classList = classList;
+        if(textContent !== '') el.textContent = textContent;
+        if(id !== '') el.id = id;
+        if(href !== '') el.href = href;
+        return el;
     }
 }

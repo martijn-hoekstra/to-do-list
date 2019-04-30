@@ -21,7 +21,6 @@ class List {
                 completed.appendChild(this.tasks[i].getTask());
             }
         }
-
         this.displayProgress();
     }
 
@@ -29,19 +28,22 @@ class List {
     createTask(date, task, priority){
         this.tasks.push(new Task(date, task, priority));
         this.displayList();
+        const taskId = this.tasks[this.tasks.length - 1].id;
+        console.log(document.querySelector('#' + taskId + ' .dropdown-menu'));
+        document.querySelector('#' + taskId + ' .dropdown-menu').addEventListener('click', page.handleInteraction);
     }
 
     removeTask(taskId){
         const element = document.getElementById(taskId);
-        const list = element.parentNode;
+        console.log(element);
+        const list = element.closest('ul');
         list.removeChild(element);
 
         const newTasksArray = this.tasks.filter(function(task, index, arr){
             return task.id !== taskId;
         });
-
         this.tasks = newTasksArray;
-
+        this.displayProgress();
         // displayList() ??
     }
 
@@ -62,6 +64,6 @@ class List {
 
         progressBar.setAttribute('aria-valuenow', `${percentage}%`);
         progressBar.style.width = `${percentage}%`;
-        progressBar.textContent = amountOfTasks > 0 ? `${tasksCompleted.length} / ${tasksInProgress.length} completed`: '';
+        progressBar.textContent = amountOfTasks > 0 ? `${tasksCompleted.length} / ${amountOfTasks} completed`: '';
     }
 }
