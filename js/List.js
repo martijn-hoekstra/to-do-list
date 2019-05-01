@@ -13,13 +13,21 @@ class List {
         inProgress.innerHTML = '';
         completed.innerHTML = '';
 
+        if(this.tasks.length === 0) {
+            const li = page.createElement('li', 'list-group-item', 'There are currently no tasks. Use the \'New task\' button to create one.');
+            li.style.textAlign = 'center';
+            inProgress.appendChild(li);
+        }
+
         // Append tasks to lists
         for(let i = 0; i < this.tasks.length; i++){
-            if(this.tasks[i].status > 1) {
+            if(this.tasks[i].status !== 'Completed') {
                 inProgress.appendChild(this.tasks[i].getTask());
             } else {
                 completed.appendChild(this.tasks[i].getTask());
             }
+            const task = document.getElementById(this.tasks[i].id);
+            this.tasks[i].setBadge(task);
         }
         this.displayProgress();
     }
@@ -29,13 +37,11 @@ class List {
         this.tasks.push(new Task(date, task, priority));
         this.displayList();
         const taskId = this.tasks[this.tasks.length - 1].id;
-        console.log(document.querySelector('#' + taskId + ' .dropdown-menu'));
         document.querySelector('#' + taskId + ' .dropdown-menu').addEventListener('click', page.handleInteraction);
     }
 
     removeTask(taskId){
         const element = document.getElementById(taskId);
-        console.log(element);
         const list = element.closest('ul');
         list.removeChild(element);
 
@@ -43,7 +49,7 @@ class List {
             return task.id !== taskId;
         });
         this.tasks = newTasksArray;
-        this.displayProgress();
+        this.displayList();
         // displayList() ??
     }
 

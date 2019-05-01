@@ -4,7 +4,7 @@ class Task {
         this.description = description;
         this.date = date;
         this.priority = priority;
-        this.status = 3;
+        this.status = 'Not started';
     }
 
     getTask(){
@@ -24,6 +24,7 @@ class Task {
         const statusDropdownNotStarted = page.createElement('a', 'dropdown-item', 'Not started', '', '#');
         const removeButton =             page.createElement('button', 'btn btn-outline-danger', 'Remove', 'removeTask', '#');
         
+        description.innerHTML = `<span class="badge badge-pill badge-warning">${this.status}</span> ${this.description}`;
         li.setAttribute('data-status', this.status);
         statusButton.setAttribute('data-toggle', 'dropdown');
         statusButton.setAttribute('aria-haspopup', 'true');
@@ -55,6 +56,22 @@ class Task {
     // get status(){
     //     return this.status;
     // }
+
+    setBadge(task) {
+        const badge = task.querySelector('.badge');
+        switch(this.status) {
+            case 'Completed':
+                badge.classList = 'badge badge-pill badge-success';
+                break;
+            case 'In progress':
+                badge.classList = 'badge badge-pill badge-info';
+                break;
+            case 'Not started':
+                badge.classList = 'badge badge-pill badge-warning';
+                break;
+        }
+        badge.textContent = this.status;
+    }
 
     edit(date, description, priority){
         this.date = date;
