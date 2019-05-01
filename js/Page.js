@@ -35,6 +35,8 @@ class Page {
                         break;
                     }
                 }
+            } else if(e.target.id === 'listName'){
+                page.lists[page.activeList].edit(e.target, 'date');
             }
         }
     }
