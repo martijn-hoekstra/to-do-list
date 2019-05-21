@@ -77,6 +77,7 @@ class Task {
         this.date = date;
         this.description = description;
         this.priority = priority;
-    }
 
+        page.lists[page.activeList].displaylist();
+    }
 }
